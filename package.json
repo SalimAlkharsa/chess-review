@@ -1,0 +1,17 @@
+{
+  "name": "chess-review",
+  "version": "1.0.0",
+  "description": "Local chess game review with Stockfish + Claude coaching",
+  "main": "index.js",
+  "scripts": {
+    "analyze": "node scripts/analyze.mjs",
+    "serve": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chess.js": "^1.0.0"
+  },
+  "type": "commonjs"
+}

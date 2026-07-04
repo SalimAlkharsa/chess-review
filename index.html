@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chess Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --felt:#163a2e; --felt-2:#0f2b21;
+    --sq-light:#e7dcc0; --sq-dark:#5c7a55;
+    --ivory:#f2e9d3; --ink:#20281f; --ink-soft:#5a5646;
+    --brass:#c8992f; --brass-deep:#9c7414; --line:#cbbf9c;
+    --c-book:#a98a54; --c-best:#5c9b52; --c-great:#2f9d78; --c-good:#8a9a5b;
+    --c-inacc:#d8a53a; --c-mist:#e0842f; --c-blun:#cf4130; --c-forced:#8f8a7a;
+    --arrow-best:#3f9d46;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:radial-gradient(120% 90% at 50% -10%, #1d4636 0%, var(--felt) 42%, var(--felt-2) 100%);
+    color:var(--ivory); font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh; padding:22px clamp(12px,3vw,34px) 40px;
+  }
+  header.top{max-width:1120px;margin:0 auto 18px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px 22px}
+  .brand{display:flex;flex-direction:column;gap:2px}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass);font-weight:500}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4.4vw,44px);line-height:.95;margin:0;letter-spacing:-.01em;color:#f6efdc}
+  .subline{font-size:13.5px;color:#c7d3c0;max-width:60ch;margin-top:4px;line-height:1.45}
+  .top-right{margin-left:auto;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+  .result-chip{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.06em;color:#f6efdc;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 15px;background:rgba(0,0,0,.18)}
+  .result-chip b{color:var(--brass)}
+  select.gamesel{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;
+    background:rgba(0,0,0,.25);color:#f4eeda;border:1px solid rgba(255,255,255,.25);
+    border-radius:8px;padding:8px 10px;max-width:320px;cursor:pointer;
+  }
+  .layout{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(340px,1fr) minmax(320px,400px);gap:26px;align-items:start}
+  @media(max-width:880px){.layout{grid-template-columns:1fr}}
+
+  .board-wrap{display:flex;flex-direction:column;gap:14px;min-width:0}
+  .board-and-bar{display:flex;gap:10px;align-items:stretch}
+  .evalbar{width:16px;border-radius:5px;overflow:hidden;flex:0 0 auto;background:#25302a;border:1px solid rgba(0,0,0,.35);position:relative;box-shadow:inset 0 0 6px rgba(0,0,0,.4)}
+  .evalbar .white-fill{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(#fdfaf0,#e3dcc7);transition:height .35s cubic-bezier(.4,0,.2,1)}
+  .evalbar .mid{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.35)}
+
+  .board-outer{position:relative;flex:0 0 auto}
+  .board{
+    --sq: clamp(38px, min(62px, (100vw - 130px)/8), 62px);
+    width:calc(var(--sq)*8);height:calc(var(--sq)*8);
+    display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);
+    border-radius:6px;overflow:hidden;
+    box-shadow:0 18px 40px -14px rgba(0,0,0,.7), 0 0 0 3px #3c2c17, 0 0 0 5px #6b5024;
+  }
+  svg.arrows{position:absolute;inset:0;pointer-events:none;z-index:5}
+  .sq{position:relative;display:flex;align-items:center;justify-content:center}
+  .sq.light{background:var(--sq-light)}
+  .sq.dark{background:var(--sq-dark)}
+  .sq.hl::after{content:"";position:absolute;inset:0;background:rgba(200,153,47,.42);mix-blend-mode:multiply}
+  .sq.hl.light::after{background:rgba(200,153,47,.32)}
+  .coord{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;opacity:.6}
+  .coord.file{right:2px;bottom:1px}.coord.rank{left:2px;top:1px}
+  .sq.light .coord{color:#7d6f45}.sq.dark .coord{color:#dfe6d3}
+  .piece{font-size:calc(var(--sq)*.74);line-height:1;position:relative;z-index:2;user-select:none}
+  .piece.w{color:#fbf7ec;text-shadow:0 1px 0 #6b6350,0 -1px 0 #6b6350,1px 0 0 #6b6350,-1px 0 0 #6b6350,0 2px 3px rgba(0,0,0,.35)}
+  .piece.b{color:#2a2a26;text-shadow:0 1px 0 #808074,0 -1px 0 #6a6a60,0 2px 3px rgba(0,0,0,.3)}
+  .badge-on-board{position:absolute;top:2px;right:2px;z-index:6;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+
+  .caption{background:var(--ivory);color:var(--ink);border-radius:10px;padding:14px 16px;box-shadow:0 10px 26px -14px rgba(0,0,0,.6);border:1px solid var(--line);display:flex;flex-direction:column;gap:8px;min-height:110px}
+  .cap-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .cap-move{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;color:var(--ink)}
+  .cls-badge{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:#fff;border-radius:5px;padding:3px 9px;display:inline-flex;gap:6px;align-items:center;letter-spacing:.02em}
+  .best-chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:#fff;background:var(--arrow-best);border-radius:5px;padding:3px 9px}
+  .cap-time{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft)}
+  .cap-time b{color:var(--ink)}
+  .cap-note{font-size:13.5px;line-height:1.5;color:#3c3a2e}
+
+  .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;background:rgba(255,255,255,.08);color:#f4eeda;border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:9px 12px;cursor:pointer;transition:.15s;line-height:1;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+  .btn:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.32)}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--brass);color:#241a05;border-color:var(--brass-deep);font-weight:700}
+  .btn.primary:hover{background:#d9a838}
+  .btn.icon{width:40px;padding:9px 0;font-size:15px}
+  .btn.mini{font-size:12px;padding:7px 10px}
+  .btn:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+  .spacer{flex:1}
+
+  .rail{display:flex;flex-direction:column;gap:16px;min-width:0}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .pcard{background:var(--ivory);color:var(--ink);border-radius:10px;padding:13px 14px;border:1px solid var(--line);box-shadow:0 8px 22px -14px rgba(0,0,0,.55)}
+  .pcard.you{outline:2px solid var(--brass);outline-offset:-2px}
+  .pc-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .disc{width:16px;height:16px;border-radius:50%;border:1px solid #9a916f}
+  .disc.w{background:#fbf7ec}.disc.b{background:#2a2a26}
+  .pc-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
+  .pc-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--brass-deep);margin-left:auto;font-weight:700;letter-spacing:.08em}
+  .score{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;line-height:1;color:var(--ink)}
+  .score small{font-size:12px;color:var(--ink-soft);font-weight:500;margin-left:3px}
+  .score-lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-soft);margin-top:2px}
+  .tallies{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+  .tally{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;border-radius:5px;padding:2px 7px}
+  .pc-time{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:9px}
+
+  .findbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .findbar .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:#cdd8c6;text-transform:uppercase}
+  .toggle{display:inline-flex;border:1px solid rgba(255,255,255,.2);border-radius:8px;overflow:hidden}
+  .toggle button{background:transparent;color:#e7ded0;border:0;padding:7px 11px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;cursor:pointer}
+  .toggle button.on{background:var(--brass);color:#241a05}
+
+  .ledger{background:rgba(9,26,20,.55);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:6px;max-height:430px;overflow-y:auto}
+  .ledger::-webkit-scrollbar{width:9px}
+  .ledger::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:9px}
+  .lrow{display:grid;grid-template-columns:34px 1fr 1fr;gap:4px;align-items:stretch}
+  .lnum{font-family:'JetBrains Mono',monospace;font-size:12px;color:#9fb09a;display:flex;align-items:center;justify-content:center}
+  .lmove{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:500;color:#eee6d4;padding:6px 8px;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:6px;border:1px solid transparent;transition:.12s}
+  .lmove:hover{background:rgba(255,255,255,.08)}
+  .lmove.active{background:var(--brass);color:#241a05;font-weight:700}
+  .lmove .sym{font-size:11px;font-weight:700}
+  .lmove.active .sym{color:#241a05}
+  .lmove .t{margin-left:auto;font-size:10px;opacity:.6}
+  .lmove.empty{cursor:default}
+  .lmove.empty:hover{background:transparent}
+
+  footer{max-width:1120px;margin:22px auto 0;font-size:11.5px;color:#9fb09a;line-height:1.5}
+  kbd{font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:1px 5px;font-size:11px}
+  .empty-state{max-width:600px;margin:56px auto;text-align:center;color:#cdd8c6}
+  .empty-state code{font-family:'JetBrains Mono',monospace;color:var(--brass)}
+  .es-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,4vw,36px);color:#f6efdc;letter-spacing:-.01em;text-wrap:balance;margin-bottom:14px}
+  .es-lead{font-size:15.5px;line-height:1.65;color:#cdd8c6;margin:0 auto 22px;max-width:52ch}
+  .es-lead em{color:var(--brass);font-style:normal;font-weight:600}
+  .es-how{font-size:14.5px;line-height:1.9;color:#e7ded0}
+  .es-alt{font-size:13px;color:#9fb09a}
+
+  /* ---------------- tabs ---------------- */
+  nav.tabbar{max-width:1120px;margin:0 auto 20px;display:flex;gap:6px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .tab{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;background:transparent;color:#c7d3c0;border:0;border-bottom:2px solid transparent;padding:9px 16px;cursor:pointer;transition:.15s;margin-bottom:-1px}
+  .tab:hover{color:#f4eeda}
+  .tab.on{color:var(--brass);border-bottom-color:var(--brass)}
+
+  /* ---------------- metrics view ---------------- */
+  .metrics-view{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+  .m-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .m-stat{background:var(--ivory);color:var(--ink);border-radius:10px;padding:14px 16px;border:1px solid var(--line);box-shadow:0 8px 22px -14px rgba(0,0,0,.55)}
+  .m-stat .v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;line-height:1;color:var(--ink)}
+  .m-stat .v small{font-size:12px;color:var(--ink-soft);font-weight:500;margin-left:2px}
+  .m-stat .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;color:var(--ink-soft);margin-top:6px}
+  .m-stat .sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:4px}
+
+  .m-panel{background:rgba(9,26,20,.55);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 16px}
+  .m-panel-head{display:flex;align-items:center;margin-bottom:10px}
+  .m-panel-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#f4eeda}
+  .m-panel-title small{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:11px;color:#9fb09a;letter-spacing:.02em}
+  svg.m-trend{width:100%;height:120px;display:block;overflow:visible}
+
+  .m-tablewrap{overflow-x:auto}
+  table.m-table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
+  .m-table th{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9fb09a;text-align:right;padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.14)}
+  .m-table th:first-child,.m-table td:first-child{text-align:left}
+  .m-table td{padding:8px 10px;text-align:right;border-bottom:1px solid rgba(255,255,255,.06);color:#e7ded0;font-family:'JetBrains Mono',monospace}
+  .m-table tr.clickable{cursor:pointer}
+  .m-table tr.clickable:hover td{background:rgba(255,255,255,.06)}
+  .m-table td.game-title{font-family:'Space Grotesk',sans-serif;font-weight:600;color:#f4eeda;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .m-acc{font-weight:700}
+  .m-res{font-weight:700;font-size:12px;padding:2px 7px;border-radius:5px;color:#241a05}
+  .m-res.win{background:var(--c-best)}.m-res.loss{background:var(--c-blun);color:#fff}.m-res.draw{background:var(--c-forced);color:#fff}
+  .m-chip{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;border-radius:4px;padding:1px 6px}
+</style>
+</head>
+<body>
+<script>window.GAMES = window.GAMES || [];</script>
+<script src="games/games.js"></script>
+
+<header class="top">
+  <div class="brand">
+    <span class="kicker">Study the tape · sharpen the system</span>
+    <h1>Chess Review</h1>
+    <div class="subline" id="summary"></div>
+  </div>
+  <div class="top-right">
+    <select class="gamesel" id="gamesel" aria-label="Select game"></select>
+    <div class="result-chip" id="resultChip"></div>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tab on" data-view="review">Review</button>
+  <button class="tab" data-view="metrics">Metrics</button>
+</nav>
+
+<div class="layout" id="app" style="display:none">
+  <section class="board-wrap">
+    <div class="board-and-bar">
+      <div class="evalbar" title="Evaluation (White advantage fills up)">
+        <div class="white-fill" id="whiteFill" style="height:50%"></div>
+        <div class="mid"></div>
+      </div>
+      <div class="board-outer">
+        <div class="board" id="board" role="grid" aria-label="Chess board"></div>
+        <svg class="arrows" id="arrows"></svg>
+      </div>
+    </div>
+
+    <div class="caption">
+      <div class="cap-head">
+        <span class="cap-move" id="capMove">Starting position</span>
+        <span class="cls-badge" id="capBadge" style="display:none"></span>
+        <span class="best-chip" id="capBest" style="display:none"></span>
+        <span class="cap-time" id="capTime"></span>
+      </div>
+      <div class="cap-note" id="capNote"></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn icon" id="first" title="Start (Home)">&#124;&#9664;</button>
+      <button class="btn icon" id="prev" title="Back (←)">&#9664;</button>
+      <button class="btn primary" id="play" title="Autoplay (Space)">&#9654; Play</button>
+      <button class="btn icon" id="next" title="Forward (→)">&#9654;</button>
+      <button class="btn icon" id="last" title="End (End)">&#9654;&#124;</button>
+      <div class="spacer"></div>
+      <button class="btn mini" id="arrowToggle" title="Show/hide best-move arrows (A)">&#10132; Arrows: on</button>
+      <button class="btn mini" id="flip" title="Flip board (F)">&#8645; Flip</button>
+    </div>
+  </section>
+
+  <aside class="rail">
+    <div class="cards" id="cards"></div>
+    <div class="findbar">
+      <span class="lbl">Jump to issues</span>
+      <div class="toggle" id="focusToggle">
+        <button data-focus="w" class="on">White</button>
+        <button data-focus="b">Black</button>
+      </div>
+      <div class="spacer" style="flex:1"></div>
+      <button class="btn mini" id="prevIssue">&#9664; Issue</button>
+      <button class="btn mini" id="nextIssue">Issue &#9654;</button>
+    </div>
+    <div class="ledger" id="ledger"></div>
+  </aside>
+</div>
+
+<section class="metrics-view" id="metricsView" style="display:none">
+  <div class="m-summary" id="mSummary"></div>
+  <div class="m-panel">
+    <div class="m-panel-head">
+      <span class="m-panel-title">Accuracy over time <small>(your games, oldest → newest)</small></span>
+    </div>
+    <svg class="m-trend" id="mTrend" viewBox="0 0 100 34" preserveAspectRatio="none" aria-label="Accuracy trend"></svg>
+  </div>
+  <div class="m-panel">
+    <div class="m-panel-head"><span class="m-panel-title">Per-game breakdown</span></div>
+    <div class="m-tablewrap">
+      <table class="m-table" id="mTable"></table>
+    </div>
+  </div>
+</section>
+
+<div class="empty-state" id="empty" style="display:none">
+  <div class="es-title">Watch your own film.</div>
+  <p class="es-lead">Athletes review the tape to get better — every possession, what worked,
+  what didn't. Chess is easier: every move is already recorded. Feed a game in and
+  Stockfish marks the turning points while the notes explain the <em>why</em>, so you
+  can spot your patterns and build a system that's yours.</p>
+  <p class="es-how">Add your first game:<br>
+  <code>./run.sh</code> &nbsp;— paste your chess.com moves, press Ctrl-D, done.<br>
+  <span class="es-alt">Or open this repo in Claude Code, paste your moves, and say
+  “review my game.”</span></p>
+</div>
+
+<footer>
+  <kbd>&larr;</kbd> <kbd>&rarr;</kbd> step · <kbd>Home</kbd>/<kbd>End</kbd> jump · <kbd>Space</kbd> play ·
+  <kbd>A</kbd> arrows · <kbd>F</kbd> flip. Green arrow = Stockfish's preferred move whenever the played move wasn't best.
+  Evals by Stockfish; commentary by your reviewer.
+</footer>
+
+<script>
+/* ---------------- classification meta ---------------- */
+const CLS = {
+  book:{label:"Book",sym:"\u25AA",color:"var(--c-book)"},
+  best:{label:"Best",sym:"\u2605",color:"var(--c-best)"},
+  great:{label:"Great",sym:"!",color:"var(--c-great)"},
+  good:{label:"Good",sym:"\u00B7",color:"var(--c-good)"},
+  inacc:{label:"Inaccuracy",sym:"?!",color:"var(--c-inacc)"},
+  mist:{label:"Mistake",sym:"?",color:"var(--c-mist)"},
+  blun:{label:"Blunder",sym:"??",color:"var(--c-blun)"},
+  forced:{label:"Forced",sym:"\u25A1",color:"var(--c-forced)"},
+};
+const BAD = new Set(['inacc','mist','blun']);
+
+/* ---------------- state ---------------- */
+let G=null, ply=0, flipped=false, playing=false, timer=null, issueFocus='w', showArrows=true;
+const boardEl=document.getElementById('board');
+const arrowsEl=document.getElementById('arrows');
+const glyph={p:'\u265F',n:'\u265E',b:'\u265D',r:'\u265C',q:'\u265B',k:'\u265A'};
+
+function fenToBoard(fen){
+  const rows=fen.split(' ')[0].split('/');
+  const out=[];
+  for(const row of rows){for(const ch of row){ if(/\d/.test(ch)){for(let i=0;i<+ch;i++)out.push(null);} else out.push(ch);}}
+  return out;
+}
+const idxToSquare=i=>'abcdefgh'[i%8]+(8-Math.floor(i/8));
+const squareToIdx=sq=>('abcdefgh'.indexOf(sq[0]))+(8-+sq[1])*8;
+
+/* ---------------- board ---------------- */
+function highlightSet(){
+  if(ply===0) return new Set();
+  const m=G.moves[ply-1];
+  const s=new Set([squareToIdx(m.from),squareToIdx(m.to)]);
+  // include castling rook / en-passant diffs
+  const prev=fenToBoard(G.fens[ply-1]),cur=fenToBoard(G.fens[ply]);
+  for(let i=0;i<64;i++) if(prev[i]!==cur[i]) s.add(i);
+  return s;
+}
+function renderBoard(){
+  const b=fenToBoard(G.fens[ply]);
+  const hl=highlightSet();
+  boardEl.innerHTML='';
+  const order=[];for(let i=0;i<64;i++)order.push(i);
+  if(flipped)order.reverse();
+  for(const i of order){
+    const rank=Math.floor(i/8),file=i%8;
+    const sq=document.createElement('div');
+    sq.className='sq '+(((rank+file)%2===0)?'light':'dark')+(hl.has(i)?' hl':'');
+    const pc=b[i];
+    if(pc){
+      const s=document.createElement('span');
+      s.className='piece '+(pc===pc.toUpperCase()?'w':'b');
+      s.textContent=glyph[pc.toLowerCase()];
+      sq.appendChild(s);
+    }
+    const showFile=flipped?rank===0:rank===7, showRank=flipped?file===7:file===0;
+    if(showFile){const c=document.createElement('span');c.className='coord file';c.textContent='abcdefgh'[file];sq.appendChild(c);}
+    if(showRank){const c=document.createElement('span');c.className='coord rank';c.textContent=(8-rank);sq.appendChild(c);}
+    if(ply>0 && idxToSquare(i)===G.moves[ply-1].to){
+      const m=G.moves[ply-1],badge=document.createElement('div');
+      badge.className='badge-on-board';
+      badge.style.background=CLS[m.cls].color;
+      badge.textContent=CLS[m.cls].sym;
+      sq.appendChild(badge);
+    }
+    boardEl.appendChild(sq);
+  }
+  renderArrows();
+}
+
+/* ---------------- arrows ---------------- */
+function squareCenter(sq){
+  let f='abcdefgh'.indexOf(sq[0]), r=8-+sq[1]; // r: 0=rank8 ... 7=rank1
+  if(flipped){f=7-f;r=7-r;}
+  return [(f+0.5)*12.5,(r+0.5)*12.5]; // percent-of-board coords in a 100x100 viewBox
+}
+function drawArrow(svg,from,to,color,opacity){
+  const [x1,y1]=squareCenter(from),[x2,y2]=squareCenter(to);
+  const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy);
+  if(!len)return;
+  const ux=dx/len,uy=dy/len;
+  const startPad=3.4, headLen=4.6, headW=3.4, shaftW=2.2;
+  const sx=x1+ux*startPad, sy=y1+uy*startPad;
+  const hx=x2-ux*headLen, hy=y2-uy*headLen;
+  const px=-uy,py=ux;
+  const pts=[
+    [sx+px*shaftW/2,sy+py*shaftW/2],[hx+px*shaftW/2,hy+py*shaftW/2],
+    [hx+px*headW,hy+py*headW],[x2,y2],
+    [hx-px*headW,hy-py*headW],[hx-px*shaftW/2,hy-py*shaftW/2],
+    [sx-px*shaftW/2,sy-py*shaftW/2]
+  ].map(p=>p.map(n=>n.toFixed(2)).join(',')).join(' ');
+  const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  poly.setAttribute('points',pts);
+  poly.setAttribute('fill',color);
+  poly.setAttribute('opacity',opacity);
+  poly.setAttribute('stroke','rgba(0,0,0,.35)');
+  poly.setAttribute('stroke-width','.5');
+  svg.appendChild(poly);
+}
+function renderArrows(){
+  arrowsEl.setAttribute('viewBox','0 0 100 100');
+  arrowsEl.setAttribute('preserveAspectRatio','none');
+  arrowsEl.innerHTML='';
+  if(!showArrows||ply===0)return;
+  const m=G.moves[ply-1];
+  if(m.best && (BAD.has(m.cls)||m.cls==='good')){
+    // arrow shows what should have been played from the PREVIOUS position
+    drawArrow(arrowsEl,m.best.from,m.best.to,'#3f9d46',0.92);
+  }
+}
+
+/* ---------------- eval bar & caption ---------------- */
+function updateEval(){
+  const ev = ply===0?0.2:G.moves[ply-1].eval;
+  const clamped=Math.max(-8,Math.min(8,ev));
+  document.getElementById('whiteFill').style.height=((clamped+8)/16*100)+'%';
+}
+const fmtMoveLabel=i=>{const n=Math.ceil(i/2);return (i%2===1)?n+'. '+G.moves[i-1].san:n+'... '+G.moves[i-1].san;};
+function updateCaption(){
+  const capMove=document.getElementById('capMove'),capBadge=document.getElementById('capBadge'),
+        capBest=document.getElementById('capBest'),capTime=document.getElementById('capTime'),
+        capNote=document.getElementById('capNote');
+  if(ply===0){
+    capMove.textContent='Starting position';
+    capBadge.style.display='none';capBest.style.display='none';capTime.textContent='';
+    capNote.textContent='Step through with the controls or arrow keys. When a move wasn\u2019t best, the green arrow shows what Stockfish preferred \u2014 try to guess it before advancing.';
+    return;
+  }
+  const m=G.moves[ply-1],meta=CLS[m.cls];
+  capMove.textContent=fmtMoveLabel(ply);
+  capBadge.style.display='inline-flex';
+  capBadge.style.background=meta.color;
+  capBadge.innerHTML='<span>'+meta.sym+'</span> '+meta.label;
+  if(m.best&&showArrows!==null&&(BAD.has(m.cls)||m.cls==='good')){
+    capBest.style.display='inline-flex';
+    capBest.textContent='\u2794 '+m.best.san;
+  } else capBest.style.display='none';
+  const ev=m.eval,evTxt=Math.abs(ev)>=90?(ev>0?'+M':'\u2212M'):((ev>0?'+':'')+ev.toFixed(1));
+  capTime.innerHTML=(m.timeSec!=null?('<b>'+m.timeSec.toFixed(1)+'s</b> \u00B7 '):'')+'eval '+evTxt;
+  capNote.textContent=m.note||(m.best&&BAD.has(m.cls)?('Stockfish preferred '+m.best.san+' here.'):(''));
+}
+
+/* ---------------- ledger & cards ---------------- */
+function buildLedger(){
+  const led=document.getElementById('ledger');led.innerHTML='';
+  const pairs=Math.ceil(G.moves.length/2);
+  for(let p=0;p<pairs;p++){
+    const row=document.createElement('div');row.className='lrow';
+    const num=document.createElement('div');num.className='lnum';num.textContent=(p+1)+'.';row.appendChild(num);
+    for(const side of[0,1]){
+      const idx=p*2+side;
+      const cell=document.createElement('div');
+      if(idx<G.moves.length){
+        const m=G.moves[idx],meta=CLS[m.cls];
+        cell.className='lmove';cell.dataset.ply=idx+1;
+        cell.innerHTML='<span class="sym" style="color:'+meta.color+'">'+meta.sym+'</span>'+m.san+
+          (m.timeSec!=null?'<span class="t">'+m.timeSec.toFixed(0)+'s</span>':'');
+        cell.addEventListener('click',()=>goto(idx+1));
+      } else cell.className='lmove empty';
+      row.appendChild(cell);
+    }
+    led.appendChild(row);
+  }
+}
+function syncLedger(){
+  document.querySelectorAll('.lmove').forEach(el=>el.classList.toggle('active',+el.dataset.ply===ply));
+  const a=document.querySelector('.lmove.active');if(a&&a.scrollIntoView)a.scrollIntoView({block:'nearest'});
+}
+function buildCards(){
+  const el=document.getElementById('cards');el.innerHTML='';
+  [['w','White'],['b','Black']].forEach(([key,base])=>{
+    const you=G.youPlayed===key;
+    let c={blun:0,mist:0,inacc:0,best:0,great:0},t=0,tn=0,n=0;
+    G.moves.forEach((m,i)=>{
+      if((i%2===0)!==(key==='w'))return;
+      n++;if(m.timeSec!=null){t+=m.timeSec;tn++;}
+      if(c[m.cls]!==undefined)c[m.cls]++;
+    });
+    // Prefer the engine-derived accuracy stored on the game (for the side the
+    // user played); fall back to the rough heuristic for the opponent side.
+    const acc=(you&&G.metrics&&typeof G.metrics.accuracy==='number')
+      ? G.metrics.accuracy
+      : Math.max(12,Math.round(100-(c.blun*16+c.mist*8+c.inacc*3)*40/Math.max(1,n)));
+    const card=document.createElement('div');
+    card.className='pcard'+(you?' you':'');
+    card.innerHTML=
+      '<div class="pc-top"><span class="disc '+key+'"></span><span class="pc-name">'+base+(you?' (You)':'')+'</span>'+
+      '<span class="pc-tag">'+(you?'YOU':'OPP')+'</span></div>'+
+      '<div class="score">'+acc+'<small>/100</small></div><div class="score-lbl">Est. accuracy</div>'+
+      '<div class="tallies">'+tally('blun',c.blun)+tally('mist',c.mist)+tally('inacc',c.inacc)+
+      (c.best?tally('best',c.best):'')+'</div>'+
+      (tn?'<div class="pc-time">avg '+(t/tn).toFixed(1)+'s / move \u00B7 '+t.toFixed(0)+'s total</div>':'');
+    el.appendChild(card);
+  });
+}
+const tally=(cls,count)=>'<span class="tally" style="background:'+CLS[cls].color+'">'+count+' '+CLS[cls].label+'</span>';
+
+/* ---------------- nav ---------------- */
+function goto(p){ply=Math.max(0,Math.min(G.moves.length,p));renderBoard();updateEval();updateCaption();syncLedger();}
+const step=d=>goto(ply+d);
+function playToggle(){
+  playing=!playing;
+  const btn=document.getElementById('play');
+  if(playing){
+    if(ply>=G.moves.length)goto(0);
+    btn.innerHTML='&#10073;&#10073; Pause';
+    timer=setInterval(()=>{if(ply>=G.moves.length){playToggle();return;}step(1);},900);
+  } else {btn.innerHTML='&#9654; Play';clearInterval(timer);}
+}
+function jumpIssue(dir){
+  const isW=issueFocus==='w';let i=ply;
+  while(true){
+    i+=dir;if(i<1||i>G.moves.length)return;
+    if(((i-1)%2===0)===isW && BAD.has(G.moves[i-1].cls)){goto(i);return;}
+  }
+}
+
+/* ---------------- game loading ---------------- */
+function loadGame(idx){
+  G=GAMES[idx];ply=0;flipped=(G.youPlayed==='b');
+  if(playing)playToggle();
+  document.getElementById('summary').textContent=G.summary||'';
+  document.getElementById('resultChip').innerHTML='RESULT <b>'+(G.result||'?')+'</b>'+(G.depth?' \u00B7 d'+G.depth:'');
+  issueFocus=G.youPlayed;
+  document.querySelectorAll('#focusToggle button').forEach(b=>b.classList.toggle('on',b.dataset.focus===issueFocus));
+  buildLedger();buildCards();goto(0);
+}
+/* ---------------- metrics view ---------------- */
+function resultClass(res,you){
+  if(!res||res==='?')return 'draw';
+  if(res==='1/2-1/2')return 'draw';
+  const whiteWon=res==='1-0';
+  const youAreWhite=you==='w';
+  return (whiteWon===youAreWhite)?'win':'loss';
+}
+function metricsGames(){
+  // games that carry metrics, in file (chronological) order
+  return GAMES.map((g,i)=>({g,i})).filter(x=>x.g.metrics);
+}
+function renderMetrics(){
+  const list=metricsGames();
+  const sumEl=document.getElementById('mSummary');
+  const tableEl=document.getElementById('mTable');
+  if(!list.length){
+    sumEl.innerHTML='<div class="m-stat"><div class="v">0</div><div class="k">Games tracked</div></div>';
+    tableEl.innerHTML='';document.getElementById('mTrend').innerHTML='';return;
+  }
+  const ms=list.map(x=>x.g.metrics);
+  const avg=k=>ms.reduce((a,m)=>a+(m[k]||0),0)/ms.length;
+  const wins=list.filter(x=>resultClass(x.g.result,x.g.metrics.youPlayed)==='win').length;
+  const losses=list.filter(x=>resultClass(x.g.result,x.g.metrics.youPlayed)==='loss').length;
+  const draws=list.length-wins-losses;
+  const totalBlun=ms.reduce((a,m)=>a+m.blunders,0);
+
+  sumEl.innerHTML=[
+    stat(avg('accuracy').toFixed(1),'%','Avg accuracy'),
+    stat(Math.round(avg('acpl')),'','Avg centipawn loss','lower is better'),
+    stat(list.length,'','Games tracked',wins+'W · '+losses+'L · '+draws+'D'),
+    stat((totalBlun/list.length).toFixed(1),'','Blunders / game',totalBlun+' total'),
+    stat(avg('avgTimeSec')?avg('avgTimeSec').toFixed(1):'—','s','Avg time / move'),
+  ].join('');
+
+  // trend sparkline (accuracy per game, oldest→newest)
+  drawTrend(list.map(x=>x.g.metrics.accuracy));
+
+  // table
+  let html='<thead><tr><th>Game</th><th>Side</th><th>Result</th><th>Acc</th><th>ACPL</th>'+
+    '<th>Blun</th><th>Mist</th><th>Inacc</th><th>s/move</th></tr></thead><tbody>';
+  for(const {g,i} of list){
+    const m=g.metrics, rc=resultClass(g.result,m.youPlayed);
+    const resLabel=rc==='win'?'Win':rc==='loss'?'Loss':'Draw';
+    html+='<tr class="clickable" data-idx="'+i+'">'+
+      '<td class="game-title" title="'+esc(g.title||g.id)+'">'+(g.date?'<span style="color:#9fb09a">'+g.date+'</span> ':'')+esc(g.title||g.id)+'</td>'+
+      '<td>'+(m.youPlayed==='w'?'White':'Black')+'</td>'+
+      '<td><span class="m-res '+rc+'">'+resLabel+'</span></td>'+
+      '<td class="m-acc" style="color:'+accColor(m.accuracy)+'">'+m.accuracy.toFixed(1)+'</td>'+
+      '<td>'+m.acpl+'</td>'+
+      '<td>'+chip(m.blunders,'--c-blun')+'</td>'+
+      '<td>'+chip(m.mistakes,'--c-mist')+'</td>'+
+      '<td>'+chip(m.inaccuracies,'--c-inacc')+'</td>'+
+      '<td>'+(m.avgTimeSec!=null?m.avgTimeSec.toFixed(1):'—')+'</td>'+
+    '</tr>';
+  }
+  html+='</tbody>';
+  tableEl.innerHTML=html;
+  tableEl.querySelectorAll('tr.clickable').forEach(tr=>{
+    tr.onclick=()=>{ loadGame(+tr.dataset.idx); document.getElementById('gamesel').value=tr.dataset.idx; switchView('review'); };
+  });
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const stat=(v,unit,k,sub)=>'<div class="m-stat"><div class="v">'+v+(unit?'<small>'+unit+'</small>':'')+'</div><div class="k">'+k+'</div>'+(sub?'<div class="sub">'+sub+'</div>':'')+'</div>';
+const chip=(n,varname)=>n>0?'<span class="m-chip" style="background:var('+varname+')">'+n+'</span>':'<span style="color:#5f7060">0</span>';
+function accColor(a){ return a>=80?'var(--c-best)':a>=65?'var(--c-good)':a>=45?'var(--c-inacc)':'var(--c-blun)'; }
+function drawTrend(vals){
+  const svg=document.getElementById('mTrend');svg.innerHTML='';
+  const W=100,H=34,pad=3;
+  const n=vals.length;
+  // gridlines at 25/50/75
+  [25,50,75].forEach(gy=>{
+    const y=H-pad-((gy/100)*(H-2*pad));
+    const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',0);l.setAttribute('x2',W);l.setAttribute('y1',y);l.setAttribute('y2',y);
+    l.setAttribute('stroke','rgba(255,255,255,.08)');l.setAttribute('stroke-width','.3');svg.appendChild(l);
+  });
+  const xOf=i=>n===1?W/2:pad+(i/(n-1))*(W-2*pad);
+  const yOf=v=>H-pad-((Math.max(0,Math.min(100,v))/100)*(H-2*pad));
+  if(n>1){
+    const d=vals.map((v,i)=>(i?'L':'M')+xOf(i).toFixed(2)+' '+yOf(v).toFixed(2)).join(' ');
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',d);path.setAttribute('fill','none');
+    path.setAttribute('stroke','var(--brass)');path.setAttribute('stroke-width','.7');
+    path.setAttribute('stroke-linejoin','round');path.setAttribute('vector-effect','non-scaling-stroke');
+    path.style.strokeWidth='2px';svg.appendChild(path);
+  }
+  vals.forEach((v,i)=>{
+    const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',xOf(i));c.setAttribute('cy',yOf(v));c.setAttribute('r',n>40?.7:1.1);
+    c.setAttribute('fill',accColor(v));svg.appendChild(c);
+    const t=document.createElementNS('http://www.w3.org/2000/svg','title');
+    t.textContent='Game '+(i+1)+': '+v.toFixed(1)+'%';c.appendChild(t);
+  });
+}
+
+/* ---------------- view switching ---------------- */
+let currentView='review';
+function switchView(v){
+  currentView=v;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.view===v));
+  const isReview=v==='review';
+  document.getElementById('app').style.display=isReview?'grid':'none';
+  document.getElementById('metricsView').style.display=isReview?'none':'flex';
+  document.getElementById('gamesel').style.visibility=isReview?'visible':'hidden';
+  const sub=document.getElementById('summary');
+  if(v==='metrics'){
+    sub.textContent='Your tape, game over game — where the accuracy is trending and which mistakes keep showing up. Progress is the point.';
+    renderMetrics();
+  } else if(G){
+    sub.textContent=G.summary||'';
+  }
+}
+
+function init(){
+  if(!GAMES.length){
+    document.getElementById('empty').style.display='block';
+    document.getElementById('tabbar').style.display='none';
+    return;
+  }
+  document.getElementById('app').style.display='grid';
+  const sel=document.getElementById('gamesel');
+  GAMES.forEach((g,i)=>{
+    const o=document.createElement('option');o.value=i;o.textContent=(g.date?g.date+' \u2014 ':'')+(g.title||g.id);
+    sel.appendChild(o);
+  });
+  sel.value=GAMES.length-1;
+  sel.onchange=()=>loadGame(+sel.value);
+  loadGame(GAMES.length-1);
+}
+
+document.querySelectorAll('.tab').forEach(t=>{ t.onclick=()=>switchView(t.dataset.view); });
+document.getElementById('first').onclick=()=>goto(0);
+document.getElementById('prev').onclick=()=>step(-1);
+document.getElementById('next').onclick=()=>step(1);
+document.getElementById('last').onclick=()=>goto(G.moves.length);
+document.getElementById('play').onclick=playToggle;
+document.getElementById('flip').onclick=()=>{flipped=!flipped;renderBoard();};
+document.getElementById('arrowToggle').onclick=function(){showArrows=!showArrows;this.innerHTML='\u27B2 Arrows: '+(showArrows?'on':'off');renderBoard();updateCaption();};
+document.getElementById('nextIssue').onclick=()=>jumpIssue(1);
+document.getElementById('prevIssue').onclick=()=>jumpIssue(-1);
+document.querySelectorAll('#focusToggle button').forEach(b=>{
+  b.onclick=()=>{issueFocus=b.dataset.focus;document.querySelectorAll('#focusToggle button').forEach(x=>x.classList.toggle('on',x===b));};
+});
+document.addEventListener('keydown',e=>{
+  if(!G)return;
+  if(e.key==='ArrowLeft'){step(-1);e.preventDefault();}
+  else if(e.key==='ArrowRight'){step(1);e.preventDefault();}
+  else if(e.key==='Home'){goto(0);e.preventDefault();}
+  else if(e.key==='End'){goto(G.moves.length);e.preventDefault();}
+  else if(e.key===' '){playToggle();e.preventDefault();}
+  else if(e.key.toLowerCase()==='f'){flipped=!flipped;renderBoard();}
+  else if(e.key.toLowerCase()==='a'){document.getElementById('arrowToggle').click();}
+});
+init();
+</script>
+</body>
+</html>

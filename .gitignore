@@ -1,0 +1,7 @@
+node_modules/
+
+# Anti-sprawl: intermediates never belong in the repo. The pipeline writes these
+# to a scratch dir and cleans them up, but ignore them here as a backstop.
+*.moves
+.chess_done
+.chess_input_*
