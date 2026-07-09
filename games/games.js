@@ -2060,3 +2060,1186 @@ GAMES.push({
  },
  "fp": "e4,e5,Nf3,Nc6,Bb5,a6,Bxc6,dxc6,Nc3,f6,h3,Bc5,d4,exd4,a3,dxc3,Be3,Bxe3,fxe3,Qxd1+,Kxd1,Ne7,bxc3,O-O,g4,Rd8+,Ke2,Be6,Nd4,Rd6,Nxe6,Rxe6,Rad1,Rxe4,Rhf1,Nd5,Rxd5,cxd5,Rf4,Rxf4,exf4,Re8+,Kd3,c5,c4,dxc4+,Kxc4,Re4+,Kxc5,Rxf4,Kb6,Rf3,Kxb7,Rxh3,Kxa6,Rxa3+,Kb5,f5,gxf5,h5,Kb4,Ra8,Kc5,h4,Kd6,h3,Ke6,h2,f6,gxf6,Kxf6,h1=Q,Kg6,Qh7+,Kf6,Qxc2,Ke6,Qc5,Kf6,Ra6#|6.3,0.8,5.8,2.3,9.6,3.9,4,3.4,7.2,10.7,5.2,11.6,21.9,4.7,18.5,9.8,19.1,4.1,2.1,1.7,2,4.1,7.4,24.6,32.5,5.8,10.2,12.2,7.2,27.9,15.1,1.6,8.3,4.2,8.8,7.5,10.4,1.2,5.5,1.8,1.9,1,8.8,3.6,8.4,7.7,12.2,0.8,3.9,1,24.8,3.2,2.9,2.3,6.9,1.6,5.4,0.9,4.1,1.8,8.5,1.8,19.9,1.2,10.2,1.4,5.9,1.6,1.5,3.8,1.8,1.1,3.6,2.8,4.3,7.7,9.8,8.1,5.9,1.3"
 });
+
+GAMES.push({
+ "id": "anti-grunfeld-gambit",
+ "title": "Blitz vs. Opponent — Draw by Stalemate",
+ "date": "2026-07-09",
+ "youPlayed": "b",
+ "result": "",
+ "summary": "Facing an offbeat Veresov with 3.g4?!, you grabbed the free pawn and settled into a comfortable material edge while your opponent burned moves chasing pawns instead of finishing development — by move 16 White still hadn't castled. You pressed that advantage into a completely winning position (up a piece and more by move 20), but 19...Nf6?? and especially 20...Bh6?? let White claw back the exchange, and 22...Qc6?? then handed over a full queen. Just when the game looked lost, 25.Rc1?? gave the queen right back to you, and what followed was a real fight with your queen and knight hunting White's exposed king. You even had 40...Qxh2# sitting on the board, and one move later 41...Qg4# again — but 41...h4 accidentally stalemated White's king instead, turning a completely winning position into a draw. The single biggest lesson: when hunting a boxed-in king with very few pawns on the board, always scan for stalemate (and for mate!) before playing the 'safe' move.",
+ "depth": 16,
+ "fens": [
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+  "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+  "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2",
+  "rnbqkbnr/ppp1pppp/8/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR b KQkq - 1 2",
+  "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 2 3",
+  "rnbqkb1r/ppp1pppp/5n2/3p4/3P2P1/2N5/PPP1PP1P/R1BQKBNR b KQkq - 0 3",
+  "r1bqkb1r/ppp1pppp/2n2n2/3p4/3P2P1/2N5/PPP1PP1P/R1BQKBNR w KQkq - 1 4",
+  "r1bqkb1r/ppp1pppp/2n2n2/3p4/3P2P1/P1N5/1PP1PP1P/R1BQKBNR b KQkq - 0 4",
+  "r2qkb1r/ppp1pppp/2n2n2/3p4/3P2b1/P1N5/1PP1PP1P/R1BQKBNR w KQkq - 0 5",
+  "r2qkb1r/ppp1pppp/2n2n2/3p4/3P2b1/P1N2P2/1PP1P2P/R1BQKBNR b KQkq - 0 5",
+  "r2qkb1r/ppp1pppp/2n1bn2/3p4/3P4/P1N2P2/1PP1P2P/R1BQKBNR w KQkq - 1 6",
+  "r2qkb1r/ppp1pppp/2n1bn2/3p4/3P4/P1NQ1P2/1PP1P2P/R1B1KBNR b KQkq - 2 6",
+  "r2qkb1r/1pp1pppp/2n1bn2/p2p4/3P4/P1NQ1P2/1PP1P2P/R1B1KBNR w KQkq - 0 7",
+  "r2qkb1r/1pp1pppp/2n1bn2/p2p4/P2P4/2NQ1P2/1PP1P2P/R1B1KBNR b KQkq - 0 7",
+  "r2qkb1r/1pp1pp1p/2n1bnp1/p2p4/P2P4/2NQ1P2/1PP1P2P/R1B1KBNR w KQkq - 0 8",
+  "r2qkb1r/1pp1pp1p/2n1bnp1/pQ1p4/P2P4/2N2P2/1PP1P2P/R1B1KBNR b KQkq - 1 8",
+  "1r1qkb1r/1pp1pp1p/2n1bnp1/pQ1p4/P2P4/2N2P2/1PP1P2P/R1B1KBNR w KQk - 2 9",
+  "1r1qkb1r/1pp1pp1p/2n1bnp1/pQ1N4/P2P4/5P2/1PP1P2P/R1B1KBNR b KQk - 0 9",
+  "1r1qkb1r/1pp1pp1p/2n2np1/pQ1b4/P2P4/5P2/1PP1P2P/R1B1KBNR w KQk - 0 10",
+  "1r1qkb1r/1pp1pp1p/2n2np1/pQ1b4/P2P4/5P1N/1PP1P2P/R1B1KB1R b KQk - 1 10",
+  "1r1qkb1r/1pp1pp2/2n2np1/pQ1b3p/P2P4/5P1N/1PP1P2P/R1B1KB1R w KQk - 0 11",
+  "1r1qkb1r/1pp1pp2/2n2np1/pQ1b3p/P2P1N2/5P2/1PP1P2P/R1B1KB1R b KQk - 1 11",
+  "1r1qkb2/1pp1pp1r/2n2np1/pQ1b3p/P2P1N2/5P2/1PP1P2P/R1B1KB1R w KQ - 2 12",
+  "1r1qkb2/1pp1pp1r/2n2np1/pQ1N3p/P2P4/5P2/1PP1P2P/R1B1KB1R b KQ - 0 12",
+  "1r1qkb2/1pp1pp1r/2n3p1/pQ1n3p/P2P4/5P2/1PP1P2P/R1B1KB1R w KQ - 0 13",
+  "1r1qkb2/1pp1pp1r/2n3p1/pQ1n3p/P1PP4/5P2/1P2P2P/R1B1KB1R b KQ - 0 13",
+  "1r1qkb2/1pp1pp1r/1nn3p1/pQ5p/P1PP4/5P2/1P2P2P/R1B1KB1R w KQ - 1 14",
+  "1r1qkb2/1pp1pp1r/1nn3p1/pQP4p/P2P4/5P2/1P2P2P/R1B1KB1R b KQ - 0 14",
+  "1r1qkb2/1pp1pp1r/2n3p1/pQPn3p/P2P4/5P2/1P2P2P/R1B1KB1R w KQ - 1 15",
+  "1r1qkb2/1pp1pp1r/2n3p1/pQPn3p/P2P4/5P2/1P1BP2P/R3KB1R b KQ - 2 15",
+  "1r2kb2/1ppqpp1r/2n3p1/pQPn3p/P2P4/5P2/1P1BP2P/R3KB1R w KQ - 3 16",
+  "1r2kb2/1ppqpp1r/2n3p1/BQPn3p/P2P4/5P2/1P2P2P/R3KB1R b KQ - 0 16",
+  "1r2kb2/2pqpp1r/1pn3p1/BQPn3p/P2P4/5P2/1P2P2P/R3KB1R w KQ - 0 17",
+  "1r2kb2/2pqpp1r/1Pn3p1/BQ1n3p/P2P4/5P2/1P2P2P/R3KB1R b KQ - 0 17",
+  "1r2kb2/3qpp1r/1pn3p1/BQ1n3p/P2P4/5P2/1P2P2P/R3KB1R w KQ - 0 18",
+  "1r2kb2/3qpp1r/1pn3p1/1Q1n3p/P2P4/5P2/1P1BP2P/R3KB1R b KQ - 1 18",
+  "1r2k3/3qppbr/1pn3p1/1Q1n3p/P2P4/5P2/1P1BP2P/R3KB1R w KQ - 2 19",
+  "1r2k3/3qppbr/1pn3p1/1Q1n3p/P2PP3/5P2/1P1B3P/R3KB1R b KQ - 0 19",
+  "1r2k3/3qppbr/1pn2np1/1Q5p/P2PP3/5P2/1P1B3P/R3KB1R w KQ - 1 20",
+  "1r2k3/3qppbr/1pn2np1/1Q5p/P2PPB2/5P2/1P5P/R3KB1R b KQ - 2 20",
+  "1r2k3/3qpp1r/1pn2npb/1Q5p/P2PPB2/5P2/1P5P/R3KB1R w KQ - 3 21",
+  "1B2k3/3qpp1r/1pn2npb/1Q5p/P2PP3/5P2/1P5P/R3KB1R b KQ - 0 21",
+  "1n2k3/3qpp1r/1p3npb/1Q5p/P2PP3/5P2/1P5P/R3KB1R w KQ - 0 22",
+  "1n2k3/3qpp1r/1Q3npb/7p/P2PP3/5P2/1P5P/R3KB1R b KQ - 0 22",
+  "1n2k3/4pp1r/1Qq2npb/7p/P2PP3/5P2/1P5P/R3KB1R w KQ - 1 23",
+  "1Q2k3/4pp1r/2q2npb/7p/P2PP3/5P2/1P5P/R3KB1R b KQ - 0 23",
+  "1Q6/3kpp1r/2q2npb/7p/P2PP3/5P2/1P5P/R3KB1R w KQ - 1 24",
+  "6Q1/3kpp1r/2q2npb/7p/P2PP3/5P2/1P5P/R3KB1R b KQ - 2 24",
+  "6n1/3kpp1r/2q3pb/7p/P2PP3/5P2/1P5P/R3KB1R w KQ - 0 25",
+  "6n1/3kpp1r/2q3pb/7p/P2PP3/5P2/1P5P/2R1KB1R b K - 1 25",
+  "6n1/3kpp1r/6pb/7p/P2PP3/5P2/1P5P/2q1KB1R w K - 0 26",
+  "6n1/3kpp1r/6pb/7p/P2PP3/5P2/1P3K1P/2q2B1R b - - 1 26",
+  "6n1/3kpp1r/6pb/7p/P2PP3/5P2/1q3K1P/5B1R w - - 0 27",
+  "6n1/3kpp1r/6pb/7p/P2PP3/5PK1/1q5P/5B1R b - - 1 27",
+  "4k1n1/4pp1r/6pb/7p/P2PP3/5PK1/1q5P/5B1R w - - 2 28",
+  "4k1n1/4pp1r/6pb/1B5p/P2PP3/5PK1/1q5P/7R b - - 3 28",
+  "5kn1/4pp1r/6pb/1B5p/P2PP3/5PK1/1q5P/7R w - - 4 29",
+  "5kn1/4pp1r/6pb/7p/P1BPP3/5PK1/1q5P/7R b - - 5 29",
+  "5kn1/4pp1r/6pb/7p/P1BPP3/q4PK1/7P/7R w - - 6 30",
+  "5kn1/4pp1r/6pb/7p/P1BPP3/q4PK1/7P/1R6 b - - 7 30",
+  "5kn1/4pp1r/6pb/7p/q1BPP3/5PK1/7P/1R6 w - - 0 31",
+  "1R3kn1/4pp1r/6pb/7p/q1BPP3/5PK1/7P/8 b - - 1 31",
+  "1R4n1/4ppkr/6pb/7p/q1BPP3/5PK1/7P/8 w - - 2 32",
+  "4R1n1/4ppkr/6pb/7p/q1BPP3/5PK1/7P/8 b - - 3 32",
+  "4R1n1/4ppkr/6pb/7p/2qPP3/5PK1/7P/8 w - - 0 33",
+  "6n1/4Rpkr/6pb/7p/2qPP3/5PK1/7P/8 b - - 0 33",
+  "6n1/4Rpkr/6pb/7p/3qP3/5PK1/7P/8 w - - 0 34",
+  "6n1/4Rpkr/6pb/7p/3qP2K/5P2/7P/8 b - - 1 34",
+  "8/4npkr/6pb/7p/3qP2K/5P2/7P/8 w - - 0 35",
+  "8/4npkr/6pb/7p/3qPP1K/8/7P/8 b - - 0 35",
+  "8/4n1kr/6pb/5p1p/3qPP1K/8/7P/8 w - - 0 36",
+  "8/4n1kr/6pb/5P1p/3q1P1K/8/7P/8 b - - 0 36",
+  "8/6kr/6pb/5n1p/3q1P1K/8/7P/8 w - - 0 37",
+  "8/6kr/6pb/5n1p/3q1P2/7K/7P/8 b - - 1 37",
+  "8/6kr/6p1/5n1p/3q1b2/7K/7P/8 w - - 0 38",
+  "8/6kr/6p1/5n1p/3q1b2/8/6KP/8 b - - 1 38",
+  "8/6kr/6p1/7p/3q1b1n/8/6KP/8 w - - 2 39",
+  "8/6kr/6p1/7p/3q1b1n/7K/7P/8 b - - 3 39",
+  "8/6kr/6p1/7p/5b1n/7K/7P/6q1 w - - 4 40",
+  "8/6kr/6p1/7p/5b1K/8/7P/6q1 b - - 0 40",
+  "8/6kr/6p1/6qp/5b1K/8/7P/8 w - - 1 41",
+  "8/6kr/6p1/6qp/5b2/7K/7P/8 b - - 2 41",
+  "8/6kr/6p1/6q1/5b1p/7K/7P/8 w - - 0 42"
+ ],
+ "moves": [
+  {
+   "san": "d4",
+   "from": "d2",
+   "to": "d4",
+   "eval": 0.3,
+   "cls": "book",
+   "best": {
+    "from": "e2",
+    "to": "e4",
+    "san": "e4"
+   },
+   "timeSec": 5.8,
+   "note": ""
+  },
+  {
+   "san": "d5",
+   "from": "d7",
+   "to": "d5",
+   "eval": 0.32,
+   "cls": "book",
+   "best": null,
+   "timeSec": 3,
+   "note": ""
+  },
+  {
+   "san": "Nc3",
+   "from": "b1",
+   "to": "c3",
+   "eval": -0.05,
+   "cls": "good",
+   "best": {
+    "from": "c2",
+    "to": "c4",
+    "san": "c4"
+   },
+   "timeSec": 2.3,
+   "note": "This has been a normal Queen's Pawn game so far — after 2.Nc3 Nf6 White is heading into Veresov territory, a system where White eyes e4 and a kingside attack. But your opponent's 3.g4?! throws that plan away: it grabs space but does nothing for development and permanently weakens White's kingside light squares. Stockfish much prefers the normal 3.Bf4 for White here."
+  },
+  {
+   "san": "Nf6",
+   "from": "g8",
+   "to": "f6",
+   "eval": 0.02,
+   "cls": "book",
+   "best": null,
+   "timeSec": 2.9,
+   "note": ""
+  },
+  {
+   "san": "g4",
+   "from": "g2",
+   "to": "g4",
+   "eval": -1.91,
+   "cls": "blun",
+   "best": {
+    "from": "c1",
+    "to": "f4",
+    "san": "Bf4"
+   },
+   "timeSec": 3.6,
+   "note": ""
+  },
+  {
+   "san": "Nc6",
+   "from": "b8",
+   "to": "c6",
+   "eval": -0.11,
+   "cls": "blun",
+   "best": {
+    "from": "c8",
+    "to": "g4",
+    "san": "Bxg4"
+   },
+   "timeSec": 3.1,
+   "note": "You should just have grabbed the free pawn with 3...Bxg4 (which happens next move anyway) — Nc6 is fine too, but the position was already calling out for you to take what's offered."
+  },
+  {
+   "san": "a3",
+   "from": "a2",
+   "to": "a3",
+   "eval": -1.8,
+   "cls": "blun",
+   "best": {
+    "from": "g4",
+    "to": "g5",
+    "san": "g5"
+   },
+   "timeSec": 8.7,
+   "note": "4.a3 doesn't address White's real problem — the g4 pawn is hanging and White's kingside is airy. The engine wanted 4.g5 for White, at least kicking your f6-knight for the tempo spent on g4. As played, you just eat the pawn next move for free."
+  },
+  {
+   "san": "Bxg4",
+   "from": "c8",
+   "to": "g4",
+   "eval": -1.81,
+   "cls": "best",
+   "best": null,
+   "timeSec": 6.2,
+   "note": ""
+  },
+  {
+   "san": "f3",
+   "from": "f2",
+   "to": "f3",
+   "eval": -1.67,
+   "cls": "great",
+   "best": {
+    "from": "c1",
+    "to": "f4",
+    "san": "Bf4"
+   },
+   "timeSec": 29.1,
+   "note": "5.f3 is a nice practical try by your opponent — it shores up e4 and prepares to meet ...Bh5 ideas, and Stockfish rates it as White's best move here even though White is still down material. Still, this is the point where your opponent should be recognizing they're playing a pawn down for very little compensation."
+  },
+  {
+   "san": "Be6",
+   "from": "g4",
+   "to": "e6",
+   "eval": -1.15,
+   "cls": "inacc",
+   "best": {
+    "from": "g4",
+    "to": "h5",
+    "san": "Bh5"
+   },
+   "timeSec": 4.9,
+   "note": "Be6 is fine but Bh5 was slightly more accurate, keeping your bishop actively eyeing e2/d1 and avoiding blocking your own e-pawn's future advance."
+  },
+  {
+   "san": "Qd3",
+   "from": "d1",
+   "to": "d3",
+   "eval": -1.39,
+   "cls": "good",
+   "best": {
+    "from": "c1",
+    "to": "g5",
+    "san": "Bg5"
+   },
+   "timeSec": 15.7,
+   "note": ""
+  },
+  {
+   "san": "a5",
+   "from": "a7",
+   "to": "a5",
+   "eval": -0.62,
+   "cls": "inacc",
+   "best": {
+    "from": "g7",
+    "to": "g6",
+    "san": "g6"
+   },
+   "timeSec": 28.1,
+   "note": ""
+  },
+  {
+   "san": "a4",
+   "from": "a3",
+   "to": "a4",
+   "eval": -3.45,
+   "cls": "blun",
+   "best": {
+    "from": "c1",
+    "to": "g5",
+    "san": "Bg5"
+   },
+   "timeSec": 8.1,
+   "note": "Qb5 starts drifting for White — the queen goes hunting on the queenside but achieves little concrete, while Bg5 (pinning and developing) was consistently the engine's preference over the last several moves. Notice the pattern: your opponent keeps passing up development for pawn-grabbing tries with the queen, and you should be looking to punish that with faster development and central play."
+  },
+  {
+   "san": "g6",
+   "from": "g7",
+   "to": "g6",
+   "eval": -2.16,
+   "cls": "mist",
+   "best": {
+    "from": "c6",
+    "to": "b4",
+    "san": "Nb4"
+   },
+   "timeSec": 12,
+   "note": ""
+  },
+  {
+   "san": "Qb5",
+   "from": "d3",
+   "to": "b5",
+   "eval": -3.06,
+   "cls": "inacc",
+   "best": {
+    "from": "c1",
+    "to": "g5",
+    "san": "Bg5"
+   },
+   "timeSec": 30.4,
+   "note": ""
+  },
+  {
+   "san": "Rb8",
+   "from": "a8",
+   "to": "b8",
+   "eval": -2.14,
+   "cls": "inacc",
+   "best": {
+    "from": "e6",
+    "to": "d7",
+    "san": "Bd7"
+   },
+   "timeSec": 24.5,
+   "note": ""
+  },
+  {
+   "san": "Nxd5",
+   "from": "c3",
+   "to": "d5",
+   "eval": -3.8,
+   "cls": "mist",
+   "best": {
+    "from": "c1",
+    "to": "g5",
+    "san": "Bg5"
+   },
+   "timeSec": 15.4,
+   "note": "Nxd5 trades off White's only actively-posted knight for your bishop, but it also opens the long diagonal for your dark-squared bishop once it lands on g7, and doesn't create any real threats for White. Bg5, developing with tempo on your queen, was still the more useful try for your opponent."
+  },
+  {
+   "san": "Bxd5",
+   "from": "e6",
+   "to": "d5",
+   "eval": -3.58,
+   "cls": "good",
+   "best": {
+    "from": "d8",
+    "to": "d5",
+    "san": "Qxd5"
+   },
+   "timeSec": 7.6,
+   "note": ""
+  },
+  {
+   "san": "Nh3",
+   "from": "g1",
+   "to": "h3",
+   "eval": -4.34,
+   "cls": "inacc",
+   "best": {
+    "from": "c2",
+    "to": "c4",
+    "san": "c4"
+   },
+   "timeSec": 22.1,
+   "note": ""
+  },
+  {
+   "san": "h5",
+   "from": "h7",
+   "to": "h5",
+   "eval": -2.51,
+   "cls": "mist",
+   "best": {
+    "from": "f8",
+    "to": "g7",
+    "san": "Bg7"
+   },
+   "timeSec": 23.4,
+   "note": "Nh3 is passive for White — the knight is heading to f4 but doesn't hit anything you care about. Meanwhile Bg7 would have kept developing and eyeing the long diagonal while you're already up material; h5 is more of a side-show."
+  },
+  {
+   "san": "Nf4",
+   "from": "h3",
+   "to": "f4",
+   "eval": -3.5,
+   "cls": "inacc",
+   "best": {
+    "from": "h3",
+    "to": "g5",
+    "san": "Ng5"
+   },
+   "timeSec": 6.7,
+   "note": ""
+  },
+  {
+   "san": "Rh7",
+   "from": "h8",
+   "to": "h7",
+   "eval": -2.32,
+   "cls": "mist",
+   "best": {
+    "from": "e7",
+    "to": "e6",
+    "san": "e6"
+   },
+   "timeSec": 26.5,
+   "note": ""
+  },
+  {
+   "san": "Nxd5",
+   "from": "f4",
+   "to": "d5",
+   "eval": -3.14,
+   "cls": "inacc",
+   "best": {
+    "from": "c2",
+    "to": "c3",
+    "san": "c3"
+   },
+   "timeSec": 4.2,
+   "note": ""
+  },
+  {
+   "san": "Nxd5",
+   "from": "f6",
+   "to": "d5",
+   "eval": -2.95,
+   "cls": "good",
+   "best": {
+    "from": "d8",
+    "to": "d5",
+    "san": "Qxd5"
+   },
+   "timeSec": 8.6,
+   "note": ""
+  },
+  {
+   "san": "c4",
+   "from": "c2",
+   "to": "c4",
+   "eval": -4.79,
+   "cls": "mist",
+   "best": {
+    "from": "c2",
+    "to": "c3",
+    "san": "c3"
+   },
+   "timeSec": 11.5,
+   "note": "c4 releases the tension in the center without any follow-up threat, and it commits White's pawn structure before castling is even done. c3, keeping the center flexible, was the steadier choice for your opponent."
+  },
+  {
+   "san": "Nb6",
+   "from": "d5",
+   "to": "b6",
+   "eval": -2.52,
+   "cls": "mist",
+   "best": {
+    "from": "d5",
+    "to": "b4",
+    "san": "Nb4"
+   },
+   "timeSec": 17,
+   "note": "Nb6 retreats your knight to a square where it does very little; Nb4, hitting c2 and eyeing d3, was more active and kept your initiative rolling."
+  },
+  {
+   "san": "c5",
+   "from": "c4",
+   "to": "c5",
+   "eval": -4.08,
+   "cls": "mist",
+   "best": {
+    "from": "d4",
+    "to": "d5",
+    "san": "d5"
+   },
+   "timeSec": 23.7,
+   "note": "c5 grabs more space for White but the pawn ends up overextended and becomes a target soon after ...b6. Simple central play with d5 kept the bind without the extra weakness."
+  },
+  {
+   "san": "Nd5",
+   "from": "b6",
+   "to": "d5",
+   "eval": -3.81,
+   "cls": "good",
+   "best": {
+    "from": "b6",
+    "to": "d7",
+    "san": "Nd7"
+   },
+   "timeSec": 26.5,
+   "note": ""
+  },
+  {
+   "san": "Bd2",
+   "from": "c1",
+   "to": "d2",
+   "eval": -3.98,
+   "cls": "best",
+   "best": null,
+   "timeSec": 20.4,
+   "note": ""
+  },
+  {
+   "san": "Qd7",
+   "from": "d8",
+   "to": "d7",
+   "eval": -3,
+   "cls": "inacc",
+   "best": {
+    "from": "f8",
+    "to": "h6",
+    "san": "Bh6"
+   },
+   "timeSec": 42,
+   "note": ""
+  },
+  {
+   "san": "Bxa5",
+   "from": "d2",
+   "to": "a5",
+   "eval": -4.41,
+   "cls": "mist",
+   "best": {
+    "from": "e1",
+    "to": "c1",
+    "san": "O-O-O"
+   },
+   "timeSec": 29.1,
+   "note": "Bxa5 wins a pawn back for White but ignores king safety completely — your opponent still hasn't castled by move 16! O-O-O was available for White and would have finally gotten the king to relative safety while keeping the extra material question open. This is the recurring theme of the whole game: your opponent chasing pawns instead of finishing development, while you stay up material."
+  },
+  {
+   "san": "b6",
+   "from": "b7",
+   "to": "b6",
+   "eval": -3.59,
+   "cls": "inacc",
+   "best": {
+    "from": "c6",
+    "to": "a5",
+    "san": "Nxa5"
+   },
+   "timeSec": 25.2,
+   "note": ""
+  },
+  {
+   "san": "cxb6",
+   "from": "c5",
+   "to": "b6",
+   "eval": -3.77,
+   "cls": "best",
+   "best": null,
+   "timeSec": 8.4,
+   "note": ""
+  },
+  {
+   "san": "cxb6",
+   "from": "c7",
+   "to": "b6",
+   "eval": -3.41,
+   "cls": "good",
+   "best": {
+    "from": "c6",
+    "to": "a5",
+    "san": "Nxa5"
+   },
+   "timeSec": 8,
+   "note": ""
+  },
+  {
+   "san": "Bd2",
+   "from": "a5",
+   "to": "d2",
+   "eval": -3.28,
+   "cls": "best",
+   "best": null,
+   "timeSec": 35.3,
+   "note": ""
+  },
+  {
+   "san": "Bg7",
+   "from": "f8",
+   "to": "g7",
+   "eval": -2.53,
+   "cls": "inacc",
+   "best": {
+    "from": "d5",
+    "to": "c7",
+    "san": "Nc7"
+   },
+   "timeSec": 21.5,
+   "note": ""
+  },
+  {
+   "san": "e4",
+   "from": "e2",
+   "to": "e4",
+   "eval": -3.81,
+   "cls": "mist",
+   "best": {
+    "from": "e2",
+    "to": "e3",
+    "san": "e3"
+   },
+   "timeSec": 17.9,
+   "note": "e4 grabs central space for White but it's premature — with the White king still stuck in the center and no rook activated, e3 (solid, flexible) kept more resources in reserve for your opponent. This kind of expansion only works when you're ahead in development, not badly behind it."
+  },
+  {
+   "san": "Nf6",
+   "from": "d5",
+   "to": "f6",
+   "eval": -1.7,
+   "cls": "blun",
+   "best": {
+    "from": "d5",
+    "to": "c7",
+    "san": "Nc7"
+   },
+   "timeSec": 61.4,
+   "note": "Nf6?? retreats your knight passively when Nc7 kept it flexible and centralized, still guarding b8 and covering d5. Worse, it lets White's f4-bishop and the coming Bxb8 idea take root — this is the move that hands your opponent real chances in what had been a completely winning game for you."
+  },
+  {
+   "san": "Bf4",
+   "from": "d2",
+   "to": "f4",
+   "eval": -1.55,
+   "cls": "best",
+   "best": null,
+   "timeSec": 12.3,
+   "note": ""
+  },
+  {
+   "san": "Bh6",
+   "from": "g7",
+   "to": "h6",
+   "eval": 1.5,
+   "cls": "blun",
+   "best": {
+    "from": "b8",
+    "to": "d8",
+    "san": "Rd8"
+   },
+   "timeSec": 22.5,
+   "note": "This is the critical moment. Bh6?? walks your bishop away from defending the b8-rook, and after 21.Bxb8 Nxb8 White has won the exchange back and the position has flipped from lost-for-White to roughly balanced. Rd8, keeping everything defended, was necessary here. Always ask 'what am I leaving undefended' before moving a piece away from its post — that single lapse turned the whole game around."
+  },
+  {
+   "san": "Bxb8",
+   "from": "f4",
+   "to": "b8",
+   "eval": 1.7,
+   "cls": "best",
+   "best": null,
+   "timeSec": 2.4,
+   "note": ""
+  },
+  {
+   "san": "Nxb8",
+   "from": "c6",
+   "to": "b8",
+   "eval": 1.55,
+   "cls": "great",
+   "best": {
+    "from": "e8",
+    "to": "f8",
+    "san": "Kf8"
+   },
+   "timeSec": 4.4,
+   "note": ""
+  },
+  {
+   "san": "Qxb6",
+   "from": "b5",
+   "to": "b6",
+   "eval": 1.46,
+   "cls": "best",
+   "best": null,
+   "timeSec": 10.8,
+   "note": "Huge swing here. After 22.Qxb6, you needed to keep your queen on a safe, connected square with Qc8, staying linked to defend b8. Instead 22...Qc6?? walks into 23.Qxb8+ (or even Qxc6+ first), and White scoops up a full piece for nothing. From this point the evaluation flips from roughly balanced to completely winning for White — a brutal one-move swing that shows how sharp this position still was even after the earlier exchange sac."
+  },
+  {
+   "san": "Qc6",
+   "from": "d7",
+   "to": "c6",
+   "eval": 10.53,
+   "cls": "blun",
+   "best": {
+    "from": "d7",
+    "to": "c8",
+    "san": "Qc8"
+   },
+   "timeSec": 13.9,
+   "note": ""
+  },
+  {
+   "san": "Qxb8+",
+   "from": "b6",
+   "to": "b8",
+   "eval": 11.24,
+   "cls": "best",
+   "best": null,
+   "timeSec": 5.6,
+   "note": ""
+  },
+  {
+   "san": "Kd7",
+   "from": "e8",
+   "to": "d7",
+   "eval": 11.41,
+   "cls": "best",
+   "best": null,
+   "timeSec": 10.4,
+   "note": ""
+  },
+  {
+   "san": "Qg8",
+   "from": "b8",
+   "to": "g8",
+   "eval": 0.63,
+   "cls": "inacc",
+   "best": {
+    "from": "f1",
+    "to": "b5",
+    "san": "Bb5"
+   },
+   "timeSec": 4.3,
+   "note": ""
+  },
+  {
+   "san": "Nxg8",
+   "from": "f6",
+   "to": "g8",
+   "eval": 1.19,
+   "cls": "inacc",
+   "best": {
+    "from": "d7",
+    "to": "c7",
+    "san": "Kc7"
+   },
+   "timeSec": 5.5,
+   "note": ""
+  },
+  {
+   "san": "Rc1",
+   "from": "a1",
+   "to": "c1",
+   "eval": -9.51,
+   "cls": "blun",
+   "best": {
+    "from": "f1",
+    "to": "b5",
+    "san": "Bb5"
+   },
+   "timeSec": 2.8,
+   "note": "Rc1?? simply drops White's rook — nothing defends c1, and your queen on c6 just takes it with check via Qxc1+. Bb5+ instead, developing with check and continuing to round up material, kept White's position completely winning. This single blunder gave the queen right back to you and turned a dead-lost game (for you) back into a real fight."
+  },
+  {
+   "san": "Qxc1+",
+   "from": "c6",
+   "to": "c1",
+   "eval": -11.87,
+   "cls": "best",
+   "best": null,
+   "timeSec": 11.6,
+   "note": "From here the position is a legitimate fight again: White is up material in the abstract sense (rook+bishop+pawns vs queen+knight), but White's king is very exposed in the center and your queen has a lot of targets. Your technique from here is to keep hunting the king with checks and threats — coordinate your queen and knight, and don't let White's king find shelter."
+  },
+  {
+   "san": "Kf2",
+   "from": "e1",
+   "to": "f2",
+   "eval": -11.74,
+   "cls": "best",
+   "best": null,
+   "timeSec": 8.9,
+   "note": ""
+  },
+  {
+   "san": "Qxb2+",
+   "from": "c1",
+   "to": "b2",
+   "eval": -7.68,
+   "cls": "good",
+   "best": {
+    "from": "c1",
+    "to": "d2",
+    "san": "Qd2+"
+   },
+   "timeSec": 3.1,
+   "note": ""
+  },
+  {
+   "san": "Kg3",
+   "from": "f2",
+   "to": "g3",
+   "eval": -11.11,
+   "cls": "good",
+   "best": {
+    "from": "f1",
+    "to": "e2",
+    "san": "Be2"
+   },
+   "timeSec": 1.8,
+   "note": ""
+  },
+  {
+   "san": "Ke8",
+   "from": "d7",
+   "to": "e8",
+   "eval": -8.38,
+   "cls": "good",
+   "best": {
+    "from": "h6",
+    "to": "e3",
+    "san": "Be3"
+   },
+   "timeSec": 7.6,
+   "note": ""
+  },
+  {
+   "san": "Bb5+",
+   "from": "f1",
+   "to": "b5",
+   "eval": -9.02,
+   "cls": "great",
+   "best": {
+    "from": "e4",
+    "to": "e5",
+    "san": "e5"
+   },
+   "timeSec": 3.7,
+   "note": ""
+  },
+  {
+   "san": "Kf8",
+   "from": "e8",
+   "to": "f8",
+   "eval": -9.1,
+   "cls": "best",
+   "best": null,
+   "timeSec": 5,
+   "note": ""
+  },
+  {
+   "san": "Bc4",
+   "from": "b5",
+   "to": "c4",
+   "eval": -11.19,
+   "cls": "good",
+   "best": {
+    "from": "h1",
+    "to": "g1",
+    "san": "Rg1"
+   },
+   "timeSec": 17.7,
+   "note": ""
+  },
+  {
+   "san": "Qa3",
+   "from": "b2",
+   "to": "a3",
+   "eval": -8.78,
+   "cls": "good",
+   "best": {
+    "from": "h5",
+    "to": "h4",
+    "san": "h4+"
+   },
+   "timeSec": 7.6,
+   "note": ""
+  },
+  {
+   "san": "Rb1",
+   "from": "h1",
+   "to": "b1",
+   "eval": -12.41,
+   "cls": "good",
+   "best": {
+    "from": "h2",
+    "to": "h4",
+    "san": "h4"
+   },
+   "timeSec": 11.5,
+   "note": ""
+  },
+  {
+   "san": "Qxa4",
+   "from": "a3",
+   "to": "a4",
+   "eval": -9.05,
+   "cls": "good",
+   "best": {
+    "from": "h5",
+    "to": "h4",
+    "san": "h4+"
+   },
+   "timeSec": 6.2,
+   "note": ""
+  },
+  {
+   "san": "Rb8+",
+   "from": "b1",
+   "to": "b8",
+   "eval": -9.7,
+   "cls": "good",
+   "best": {
+    "from": "c4",
+    "to": "e2",
+    "san": "Be2"
+   },
+   "timeSec": 2.4,
+   "note": ""
+  },
+  {
+   "san": "Kg7",
+   "from": "f8",
+   "to": "g7",
+   "eval": -9.53,
+   "cls": "best",
+   "best": null,
+   "timeSec": 6.6,
+   "note": ""
+  },
+  {
+   "san": "Re8",
+   "from": "b8",
+   "to": "e8",
+   "eval": -10.61,
+   "cls": "good",
+   "best": {
+    "from": "c4",
+    "to": "b3",
+    "san": "Bb3"
+   },
+   "timeSec": 14.6,
+   "note": ""
+  },
+  {
+   "san": "Qxc4",
+   "from": "a4",
+   "to": "c4",
+   "eval": -11.92,
+   "cls": "good",
+   "best": {
+    "from": "a4",
+    "to": "e8",
+    "san": "Qxe8"
+   },
+   "timeSec": 5.6,
+   "note": ""
+  },
+  {
+   "san": "Rxe7",
+   "from": "e8",
+   "to": "e7",
+   "eval": -99.93,
+   "cls": "good",
+   "best": {
+    "from": "e8",
+    "to": "f8",
+    "san": "Rf8"
+   },
+   "timeSec": 6.7,
+   "note": ""
+  },
+  {
+   "san": "Qxd4",
+   "from": "c4",
+   "to": "d4",
+   "eval": -99.93,
+   "cls": "good",
+   "best": {
+    "from": "g8",
+    "to": "e7",
+    "san": "Nxe7"
+   },
+   "timeSec": 8.6,
+   "note": ""
+  },
+  {
+   "san": "Kh4",
+   "from": "g3",
+   "to": "h4",
+   "eval": -99.97,
+   "cls": "good",
+   "best": {
+    "from": "e7",
+    "to": "f7",
+    "san": "Rxf7+"
+   },
+   "timeSec": 15.4,
+   "note": ""
+  },
+  {
+   "san": "Nxe7",
+   "from": "g8",
+   "to": "e7",
+   "eval": -99.96,
+   "cls": "good",
+   "best": {
+    "from": "d4",
+    "to": "f2",
+    "san": "Qf2+"
+   },
+   "timeSec": 3.9,
+   "note": ""
+  },
+  {
+   "san": "f4",
+   "from": "f3",
+   "to": "f4",
+   "eval": -99.98,
+   "cls": "good",
+   "best": {
+    "from": "h4",
+    "to": "g3",
+    "san": "Kg3"
+   },
+   "timeSec": 11.4,
+   "note": ""
+  },
+  {
+   "san": "f5",
+   "from": "f7",
+   "to": "f5",
+   "eval": -15.52,
+   "cls": "good",
+   "best": {
+    "from": "d4",
+    "to": "g1",
+    "san": "Qg1"
+   },
+   "timeSec": 2,
+   "note": ""
+  },
+  {
+   "san": "exf5",
+   "from": "e4",
+   "to": "f5",
+   "eval": -99.98,
+   "cls": "good",
+   "best": {
+    "from": "h4",
+    "to": "g3",
+    "san": "Kg3"
+   },
+   "timeSec": 1.6,
+   "note": ""
+  },
+  {
+   "san": "Nxf5+",
+   "from": "e7",
+   "to": "f5",
+   "eval": -99.97,
+   "cls": "good",
+   "best": {
+    "from": "d4",
+    "to": "f4",
+    "san": "Qxf4+"
+   },
+   "timeSec": 2.1,
+   "note": ""
+  },
+  {
+   "san": "Kh3",
+   "from": "h4",
+   "to": "h3",
+   "eval": -99.97,
+   "cls": "forced",
+   "best": null,
+   "timeSec": 5,
+   "note": ""
+  },
+  {
+   "san": "Bxf4",
+   "from": "h6",
+   "to": "f4",
+   "eval": -99.97,
+   "cls": "good",
+   "best": {
+    "from": "d4",
+    "to": "f4",
+    "san": "Qxf4"
+   },
+   "timeSec": 1.7,
+   "note": ""
+  },
+  {
+   "san": "Kg2",
+   "from": "h3",
+   "to": "g2",
+   "eval": -99.97,
+   "cls": "forced",
+   "best": null,
+   "timeSec": 4,
+   "note": ""
+  },
+  {
+   "san": "Nh4+",
+   "from": "f5",
+   "to": "h4",
+   "eval": -99.97,
+   "cls": "good",
+   "best": {
+    "from": "d4",
+    "to": "d1",
+    "san": "Qd1"
+   },
+   "timeSec": 5.6,
+   "note": ""
+  },
+  {
+   "san": "Kh3",
+   "from": "g2",
+   "to": "h3",
+   "eval": -99.98,
+   "cls": "good",
+   "best": {
+    "from": "g2",
+    "to": "f1",
+    "san": "Kf1"
+   },
+   "timeSec": 1.4,
+   "note": ""
+  },
+  {
+   "san": "Qg1",
+   "from": "d4",
+   "to": "g1",
+   "eval": -99.99,
+   "cls": "good",
+   "best": {
+    "from": "d4",
+    "to": "e3",
+    "san": "Qe3+"
+   },
+   "timeSec": 9.7,
+   "note": ""
+  },
+  {
+   "san": "Kxh4",
+   "from": "h3",
+   "to": "h4",
+   "eval": -99.99,
+   "cls": "forced",
+   "best": null,
+   "timeSec": 2.4,
+   "note": ""
+  },
+  {
+   "san": "Qg5+",
+   "from": "g1",
+   "to": "g5",
+   "eval": -99.99,
+   "cls": "good",
+   "best": {
+    "from": "g1",
+    "to": "h2",
+    "san": "Qxh2#"
+   },
+   "timeSec": 5,
+   "note": "Qg5+ was good, but Qxh2# was mate in one right here — the h2 pawn was the only thing between your queen and the White king, and taking it delivers checkmate immediately. Always scan for mate before playing a 'good enough' check."
+  },
+  {
+   "san": "Kh3",
+   "from": "h4",
+   "to": "h3",
+   "eval": -99.99,
+   "cls": "forced",
+   "best": null,
+   "timeSec": 8.2,
+   "note": ""
+  },
+  {
+   "san": "h4",
+   "from": "h5",
+   "to": "h4",
+   "eval": 0,
+   "cls": "inacc",
+   "best": {
+    "from": "g5",
+    "to": "g4",
+    "san": "Qg4#"
+   },
+   "timeSec": 3.4,
+   "note": "So close! h4 looked natural but it walks into stalemate — with your queen covering every flight square except the ones h4 was meant to control, the White king on h3 suddenly has no legal moves and no checks are available. Qg4# was mate in one instead. This is the single biggest lesson from the ending: when your opponent's king is boxed into a corner with very few pawns left on the board, always double-check that your intended move doesn't remove its last legal move entirely — a completely winning position evaporated into a draw in one move."
+  }
+ ],
+ "metrics": {
+  "youPlayed": "b",
+  "result": "",
+  "moves": 41,
+  "accuracy": 36.8,
+  "acpl": 109,
+  "best": 6,
+  "good": 25,
+  "inaccuracies": 8,
+  "mistakes": 4,
+  "blunders": 4,
+  "avgTimeSec": 12.3
+ },
+ "fp": "d4,d5,Nc3,Nf6,g4,Nc6,a3,Bxg4,f3,Be6,Qd3,a5,a4,g6,Qb5,Rb8,Nxd5,Bxd5,Nh3,h5,Nf4,Rh7,Nxd5,Nxd5,c4,Nb6,c5,Nd5,Bd2,Qd7,Bxa5,b6,cxb6,cxb6,Bd2,Bg7,e4,Nf6,Bf4,Bh6,Bxb8,Nxb8,Qxb6,Qc6,Qxb8+,Kd7,Qg8,Nxg8,Rc1,Qxc1+,Kf2,Qxb2+,Kg3,Ke8,Bb5+,Kf8,Bc4,Qa3,Rb1,Qxa4,Rb8+,Kg7,Re8,Qxc4,Rxe7,Qxd4,Kh4,Nxe7,f4,f5,exf5,Nxf5+,Kh3,Bxf4,Kg2,Nh4+,Kh3,Qg1,Kxh4,Qg5+,Kh3,h4|5.8,3,2.3,2.9,3.6,3.1,8.7,6.2,29.1,4.9,15.7,28.1,8.1,12,30.4,24.5,15.4,7.6,22.1,23.4,6.7,26.5,4.2,8.6,11.5,17,23.7,26.5,20.4,42,29.1,25.2,8.4,8,35.3,21.5,17.9,61.4,12.3,22.5,2.4,4.4,10.8,13.9,5.6,10.4,4.3,5.5,2.8,11.6,8.9,3.1,1.8,7.6,3.7,5,17.7,7.6,11.5,6.2,2.4,6.6,14.6,5.6,6.7,8.6,15.4,3.9,11.4,2,1.6,2.1,5,1.7,4,5.6,1.4,9.7,2.4,5,8.2,3.4"
+});

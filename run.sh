@@ -2,8 +2,10 @@
 #
 # run.sh — one-command chess game review.
 #
-#   ./run.sh
+#   ./run.sh [w|b]
 #   > paste your chess.com move-list HTML (or a PGN / move list), then Ctrl-D
+#
+# The optional w|b argument says which color you played (default: w).
 #
 # It hands the paste to a Claude session running the chess-review skill fully
 # autonomously (no permission prompts), waits for the analysis to finish (via a
@@ -18,6 +20,13 @@ set -uo pipefail
 cd "$(dirname "$0")"
 
 MODEL="${CHESS_MODEL:-sonnet}"
+
+# --- which color did you play? ---
+case "${1:-w}" in
+  w|W|white|White) YOU_COLOR="w" ;;
+  b|B|black|Black) YOU_COLOR="b" ;;
+  *) echo "Usage: $0 [w|b]  (which color you played; default w)" >&2; exit 1 ;;
+esac
 
 # --- scratch files (outside the repo; auto-cleaned) ---
 SCRATCH="${TMPDIR:-/tmp}"
@@ -44,15 +53,16 @@ if [ ! -s "$INPUT" ]; then
   exit 1
 fi
 echo "----------------------------------------------------------------------"
-echo "Got $(wc -c < "$INPUT" | tr -d ' ') bytes. Analyzing with Claude ($MODEL)…"
+echo "Got $(wc -c < "$INPUT" | tr -d ' ') bytes. Analyzing as $YOU_COLOR with Claude ($MODEL)…"
 echo
 
 # --- the prompt handed to Claude ---
 # Spell out the allowed toolset so the session doesn't waste turns on commands the
 # sandbox will silently auto-deny. This mirrors .claude/review-sandbox.json.
 PROMPT="Review the chess game whose raw input is in the file $INPUT using the \
-chess-review skill. I played White unless the input clearly shows otherwise. \
-Follow the skill's full pipeline: extract the moves, run the Stockfish analysis, \
+chess-review skill. I played $([ "$YOU_COLOR" = "b" ] && echo "Black" || echo "White") \
+in this game — pass --you $YOU_COLOR to analyze.mjs; do not infer color from the \
+input. Follow the skill's full pipeline: extract the moves, run the Stockfish analysis, \
 write chatty coaching commentary, register the game with make-game.mjs, and \
 verify. Write all intermediate files to \$TMPDIR (not the repo) and clean them up. \
 \
